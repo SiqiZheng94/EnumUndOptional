@@ -1,2 +1,7 @@
-package org.example;public enum Gender {
+package org.example;
+
+public enum Gender {
+    MALE,
+    FEMALE,
+    DIVERSE
 }

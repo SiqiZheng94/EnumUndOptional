@@ -1,19 +1,39 @@
 package org.example;
 
+import java.time.temporal.ValueRange;
+import java.util.Optional;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Opt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        DayOfWeek monday = DayOfWeek.MONDAY;
+        System.out.println(monday.whichDay(monday));
+        System.out.println(monday.whichDay2(monday));
 
-        // Press Ctrl+R or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        PersonRepository personRepo = new PersonRepository();
+        Person person1 = new Person("1", "Alice", DayOfWeek.MONDAY, Gender.FEMALE);
+        Person person2 = new Person("2", "Alice", DayOfWeek.SUNDAY, Gender.MALE);
+        personRepo.addPerson(person1);
+        personRepo.addPerson(person2);
 
-            // Press Ctrl+D to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Cmd+F8.
-            System.out.println("i = " + i);
+
+        Optional<Person> optionalPerson = personRepo.findById("1");
+        System.out.println(optionalPerson);
+        Optional<Person> optionalPerson2 = personRepo.findById("2");
+        System.out.println(optionalPerson2);
+
+        if(optionalPerson.isPresent()){
+            System.out.println(optionalPerson.get());
+            System.out.println(optionalPerson.get().favoriteDay());
+
+        }else{
+            System.out.println("Person isn't found.");
         }
+        personRepo.numberOfGender();
+
+
+        System.out.println(personRepo.findByName("Alice"));
+        System.out.println(personRepo.findByName("Example"));
     }
 }
